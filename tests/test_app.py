@@ -31,10 +31,12 @@ def test_health_endpoint(client):
 
 def test_request_counter(client):
     """Testa se o contador de requisições funciona"""
-    response1 = client.get('/')
+    client.get('/')
+    response1 = client.get('/metrics')
     count1 = response1.get_json()['total_requests']
-
-    response2 = client.get('/')
+    
+    client.get('/')
+    response2 = client.get('/metrics')
     count2 = response2.get_json()['total_requests']
 
     assert count2 > count1
