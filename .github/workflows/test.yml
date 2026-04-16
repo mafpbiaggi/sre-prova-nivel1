@@ -27,7 +27,7 @@ jobs:
       - name: Executa os testes
         run: |
           cd tests
-          pytest -v test_app.pytest
+          pytest -v test_app.py
 
       - name: Mostra resultado
         run: echo "✅ Todos os testes passaram"
