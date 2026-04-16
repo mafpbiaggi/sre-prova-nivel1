@@ -1,0 +1,34 @@
+name: Testes Automatizados
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_requests:
+    branches: [ main, develop ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configura o Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13.13'
+
+      - name: Instala dependências
+        run: |
+          pip install -r app/requirements.txt
+          pip install -r tests/requirements.txt
+
+      - name: Executa os testes
+        run: |
+          cd tests
+          pytest -v test_app.pytest
+
+      - name: Mostra resultado
+        run: echo "✅ Todos os testes passaram"
+        
